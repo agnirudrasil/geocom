@@ -5,6 +5,15 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(nlohmann_json 3.2.0 REQUIRED)
 
-add_executable(pathfinding main.cpp)
+add_executable(pathfinding main.cpp
+        heap.h
+        graph.h
+        node.cpp
+        node.h
+        pathfinding.cpp
+        pathfinding.h
+        astar.cpp
+        astar.h
+)
 
 target_link_libraries(pathfinding PRIVATE nlohmann_json::nlohmann_json)
