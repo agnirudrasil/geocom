@@ -14,6 +14,10 @@ add_executable(pathfinding main.cpp
         pathfinding.h
         astar.cpp
         astar.h
+        graph.tpp
+        edge.cpp
+        edge.h
+        heap.tpp
 )
 
 target_link_libraries(pathfinding PRIVATE nlohmann_json::nlohmann_json)

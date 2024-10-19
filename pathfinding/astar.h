@@ -4,20 +4,30 @@
 
 #ifndef ASTAR_H
 #define ASTAR_H
+#include <utility>
+
+#include "edge.h"
+#include "graph.h"
 #include "node.h"
 
 
 class astar {
-    node start;
-    node end;
-
-    std::vector<node> retrace_path();
+    using graph = graph<node, edge, graph_type::UNDIRECTED, std::string>;
 
 public:
-    astar(node start, node end): start{std::move(start)}, end{std::move(end)} {
+    astar(std::string &start_id, std::string &end_id, graph &g): g{&g} {
+        this->start = &g.get_vertex(start_id);
+        this->end = &g.get_vertex(end_id);
     }
 
-    std::vector<node> begin();
+    std::vector<std::pair<double, double> > begin();
+
+private:
+    graph *g;
+    node *start;
+    node *end;
+
+    [[nodiscard]] std::vector<std::pair<double, double> > retrace_path() const;
 };
 
 
