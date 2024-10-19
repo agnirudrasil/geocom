@@ -4,7 +4,6 @@
 
 #include "astar.h"
 
-#include <iostream>
 #include <unordered_set>
 #include <numbers>
 #include "heap.h"
@@ -42,7 +41,7 @@ std::vector<std::pair<double, double> > astar::begin() {
     heap.push(start);
 
     while (!heap.empty()) {
-        auto current = heap.pop();
+        const auto current = heap.pop();
         closed.insert(current->id);
 
         if (current->id == end->id) {
@@ -52,7 +51,7 @@ std::vector<std::pair<double, double> > astar::begin() {
         for (auto &neighbour: g->get_neighbours(current->id)) {
             if (closed.contains(neighbour)) continue;
 
-            const auto neighbour_node = &g->get_vertex(neighbour);
+            auto neighbour_node = &g->get_vertex(neighbour);
 
             if (const long double movement_cost = current->g_cost + distance(current, neighbour_node);
                 movement_cost < neighbour_node->g_cost or !open.contains(neighbour_node->id)) {

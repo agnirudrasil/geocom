@@ -59,7 +59,7 @@ bool heap<T, Compare>::empty() {
 }
 
 template<typename T, typename Compare>
-void heap<T, Compare>::sort_down(const int start, int pos) noexcept {
+void heap<T, Compare>::sort_down(const int start, int pos) {
     auto item = m_heap.at(pos);
 
     while (pos > start) {
