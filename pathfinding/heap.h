@@ -5,6 +5,9 @@
 
 template<typename T, typename Compare = std::less<T> >
 class heap {
+    std::vector<T> m_heap;
+    constexpr static Compare cmp{};
+
 public:
     heap() = default;
 
@@ -14,6 +17,8 @@ public:
     }
 
     void push(T &element);
+
+    void push(T &&element);
 
     T pop();
 
@@ -30,9 +35,6 @@ public:
     bool empty();
 
 private:
-    std::vector<T> m_heap;
-    constexpr static Compare cmp{};
-
     void sort_down(int start, int pos);
 
     void sort_up(int pos);

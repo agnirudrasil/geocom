@@ -20,8 +20,10 @@ std::tuple<double, double> get_lat_lon(const nlohmann::basic_json<> &coords) {
 }
 
 int main() {
+    using graph_t = graph<node, edge, graph_type::UNDIRECTED, std::string>;
     std::fstream f("/Users/agnirudrasil/Projects/geocom/pathfinding/example.json");
-    graph<node, edge, graph_type::UNDIRECTED, std::string> g;
+    graph_t g;
+
     for (json d = json::parse(f); auto &feature: d["features"]) {
         if (feature["geometry"]["type"] == "LineString") {
             auto coordinates = feature["geometry"]["coordinates"];
@@ -46,7 +48,7 @@ int main() {
     json j;
 
     std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
-    node start(13.0124929, 74.7930409);
+    node start(13.0124083, 74.7917972);
     node end(13.0072809, 74.7970999);
     astar astar(start.id, end.id, g);
     auto path = astar.begin();

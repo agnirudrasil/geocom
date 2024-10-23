@@ -52,13 +52,13 @@ public:
 
     [[nodiscard]] bool contains(vertex_id_t &vertex_id) const noexcept;
 
-    [[nodiscard]] bool is_adjacent(vertex_id_t &lhs, vertex_id_t &rhs) const noexcept;
+    [[nodiscard]] bool is_adjacent(const vertex_id_t &lhs, const vertex_id_t &rhs) const noexcept;
 
     vertex_t &get_vertex(const vertex_id_t &vertex_id) {
         return vertices.at(vertex_id);
     }
 
-    edge_t &get_edge(vertex_id_t &lhs, vertex_id_t &rhs);
+    edge_t &get_edge(const vertex_id_t &lhs, const vertex_id_t &rhs);
 
     edge_t &get_edge(const edge_id_t &edge_id);
 

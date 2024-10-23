@@ -12,22 +12,19 @@
 
 
 class astar {
-    using graph = graph<node, edge, graph_type::UNDIRECTED, std::string>;
+    using graph_t = graph<node, edge, graph_type::UNDIRECTED, std::string>;
+    using path_t = std::vector<std::pair<double, double> >;
 
 public:
-    astar(std::string &start_id, std::string &end_id, graph &g): g{&g} {
-        this->start = &g.get_vertex(start_id);
-        this->end = &g.get_vertex(end_id);
+    explicit astar(graph_t &g): g{&g} {
     }
 
-    std::vector<std::pair<double, double> > begin();
+    std::optional<path_t> find_path(node &start, node &end) const;
 
 private:
-    graph *g;
-    node *start;
-    node *end;
+    graph_t *g;
 
-    [[nodiscard]] std::vector<std::pair<double, double> > retrace_path() const;
+    [[nodiscard]] static path_t retrace_path(node &start, node &end);
 };
 
 

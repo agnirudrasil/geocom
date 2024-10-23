@@ -11,18 +11,18 @@
 
 class node {
 public:
-    node *parent;
-    std::string id;
     double lat;
     double lon;
-    long double g_cost = 0;
-    long double h_cost = 0;
+    double g_cost = 0;
+    double h_cost = 0;
+    node *parent{};
+    std::string id;
 
     node(const double lat, const double lon): lat{lat}, lon{lon} {
         this->id = std::format("{}_{}", lat, lon);
     }
 
-    [[nodiscard]] long double f_cost() const noexcept {
+    [[nodiscard]] double f_cost() const noexcept {
         return g_cost + h_cost;
     }
 
@@ -56,12 +56,6 @@ template<>
 struct std::hash<node> {
     std::size_t operator()(node const &s) const noexcept {
         return std::hash<std::string>{}(s.id);
-    }
-};
-
-struct CompareNode {
-    bool operator()(const node *l, const node *r) const {
-        return l->f_cost() < r->f_cost();
     }
 };
 

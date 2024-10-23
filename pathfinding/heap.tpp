@@ -7,6 +7,13 @@ void heap<T, Compare>::push(T &element) {
 }
 
 template<typename T, typename Compare>
+void heap<T, Compare>::push(T &&element) {
+    m_heap.push_back(element);
+    sort_down(0, m_heap.size() - 1);
+}
+
+
+template<typename T, typename Compare>
 T heap<T, Compare>::pop() {
     auto last = m_heap.back();
     m_heap.pop_back();

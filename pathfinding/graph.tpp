@@ -17,7 +17,8 @@ bool graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::contains(vertex_id_t &ver
 }
 
 template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T>
-bool graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::is_adjacent(vertex_id_t &lhs, vertex_id_t &rhs) const noexcept {
+bool graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::is_adjacent(const vertex_id_t &lhs,
+                                                                   const vertex_id_t &rhs) const noexcept {
     auto edge_id = get_edge_id(lhs, rhs);
     return edges.contains(edge_id);
 }
@@ -25,7 +26,7 @@ bool graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::is_adjacent(vertex_id_t &
 
 template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T>
 typename graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::edge_t &graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::
-get_edge(vertex_id_t &lhs, vertex_id_t &rhs) {
+get_edge(const vertex_id_t &lhs, const vertex_id_t &rhs) {
     if (!is_adjacent(lhs, rhs)) {
         throw std::invalid_argument{"No edge found"};
     }
@@ -86,7 +87,7 @@ void graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::add_edge(vertex_id_t &ver
     auto edge_id = get_edge_id(vertex_id_lhs, vertex_id_rhs);
     edges.emplace(edge_id, std::forward<decltype(edge)>(edge));
     adj_list[vertex_id_lhs].insert(vertex_id_rhs);
-    if constexpr (GRAPH_TYPE == graph_type::UNDIRECTED) {
+    if constexpr (is_undirected()) {
         adj_list[vertex_id_rhs].insert(vertex_id_lhs);
     }
 }
@@ -96,7 +97,7 @@ void graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::remove_edge(vertex_id_t &
     auto edge_id = get_edge_id(lhs, rhs);
     edges.erase(edge_id);
     adj_list[lhs].erase(rhs);
-    if constexpr (GRAPH_TYPE == graph_type::UNDIRECTED) {
+    if constexpr (is_undirected()) {
         adj_list[rhs].insert(lhs);
     }
 }

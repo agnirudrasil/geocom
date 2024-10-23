@@ -8,14 +8,10 @@ find_package(nlohmann_json 3.2.0 REQUIRED)
 add_executable(pathfinding main.cpp
         heap.h
         graph.h
-        node.cpp
         node.h
-        pathfinding.cpp
-        pathfinding.h
         astar.cpp
         astar.h
         graph.tpp
-        edge.cpp
         edge.h
         heap.tpp
 )
