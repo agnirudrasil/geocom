@@ -45,7 +45,7 @@ std::optional<astar::path_t> astar::find_path(node &start, node &end) const {
         open.erase(current->id);
         closed.insert(current->id);
 
-        if (current->id == end.id) return retrace_path(start, end);
+        if (current->id == end.id) return retrace_path(g->get_vertex(start.id), g->get_vertex(end.id));
 
         for (auto &neighbour: g->get_neighbours(current->id)) {
             if (closed.contains(neighbour)) continue;
@@ -74,10 +74,11 @@ std::optional<astar::path_t> astar::find_path(node &start, node &end) const {
 astar::path_t astar::retrace_path(node &start, node &end) {
     std::vector<std::pair<double, double> > path;
     auto current = &end;
+    path.emplace_back(current->lat, current->lon);
 
     while (current->id != start.id) {
-        path.emplace_back(current->lat, current->lon);
         current = current->parent;
+        path.emplace_back(current->lat, current->lon);
     }
 
     std::ranges::reverse(path);

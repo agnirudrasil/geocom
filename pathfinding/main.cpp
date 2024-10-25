@@ -50,9 +50,9 @@ int main() {
     std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
     node start(13.0124083, 74.7917972);
     node end(13.0072809, 74.7970999);
-    astar astar(start.id, end.id, g);
-    auto path = astar.begin();
-    j["path"] = path;
+    astar astar(g);
+    auto path = astar.find_path(start, end);
+    j["path"] = path.value();
 
     std::cout << j << '\n';
 }
