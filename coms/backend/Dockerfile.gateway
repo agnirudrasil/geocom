@@ -1,0 +1,18 @@
+FROM node:latest
+
+WORKDIR /code/
+
+COPY ./gateway/package.json .
+COPY ./gateway/yarn.lock .
+
+RUN yarn install
+
+COPY ./gateway .
+
+ENV REDIS_URL redis://redis:6379
+ENV RABBITMQ_URL amqp://guest:guest@rabbit:5672/
+
+RUN yarn build
+
+
+CMD ["yarn", "start"]
