@@ -42,7 +42,7 @@ public:
 
     [[nodiscard]] size_t edge_count() const noexcept;
 
-    vertices_t &get_vertices() const noexcept {
+    vertices_t &get_vertices() noexcept {
         return vertices;
     }
 

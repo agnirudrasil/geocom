@@ -1,13 +1,11 @@
 #include <iostream>
-#include <vector>
-#include <format>
 #include <fstream>
 #include <nlohmann/json.hpp>
 
-#include "astar.h"
 #include "edge.h"
 #include "graph.h"
 #include "node.h"
+#include "utils.h"
 
 using json = nlohmann::json;
 
@@ -49,7 +47,11 @@ int main() {
 
     json j;
 
-    // std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
+    std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
+    for (const auto &n: g.get_vertices() | std::views::values) {
+        node node(0, 0);
+        double min = distance(&n, &node);
+    }
     // node start(13.0124083, 74.7917972);
     // node end(13.0072809, 74.7970999);
     // astar astar(g);
