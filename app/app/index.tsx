@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useTheme, H2, YStack, Button, YGroup, Separator } from "tamagui";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { MapPin, Navigation, PlusCircle } from "@tamagui/lucide-icons";
+import features from "./nitk.geo.json";
 
 export default function TabOneScreen() {
   const [position, setPosition] = useState(1);
@@ -170,22 +171,23 @@ export default function TabOneScreen() {
         <Geojson
           strokeWidth={3}
           strokeColor="green"
-          geojson={{
-            features: [
-              {
-                properties: {
-                  type: "way",
-                },
-                type: "Feature",
-                geometry: {
-                  type: "LineString",
-                  coordinates: markers_cpp.path.map((marker) =>
-                    marker.reverse()
-                  ),
-                },
-              },
-            ],
-          }}
+          geojson={features}
+          // geojson={{
+          //   features: [
+          //     {
+          //       properties: {
+          //         type: "way",
+          //       },
+          //       type: "Feature",
+          //       geometry: {
+          //         type: "LineString",
+          //         coordinates: markers_cpp.path.map((marker) =>
+          //           marker.reverse()
+          //         ),
+          //       },
+          //     },
+          //   ],
+          // }}
         />
       </MapView>
       <BottomSheet
