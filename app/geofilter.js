@@ -1,3 +1,4 @@
+const fs=require("fs");
 const data = require("./nitk.geo.json"); // Load the GeoJSON data
 // Log the imported data to check the structure
 
@@ -13,10 +14,16 @@ function f(features) {
             }
         }
     }
-    console.log(arr); // Output the array of matching features
+    //console.log(arr); // Output the array of matching features
 }
 
 // Call the function with the features array
 f(data.features); // Pass the features array to the function
-
-console.log(data.features.filter((f) => f.geometry?.type === 'Point' && f.properties?.tags?.name)[0].geometry.coordinates)
+const a=JSON.stringify(arr)
+fs.writeFile("filtered.json",a,(err)=>{
+    if(err){ console.log("Error :/")}
+    else{
+        console.log(":)")
+    }
+})
+//console.log(data.features.filter((f) => f.geometry?.type === 'Point' && f.properties?.tags?.name).map((f) => f.geometry.coordinates.toReversed()))

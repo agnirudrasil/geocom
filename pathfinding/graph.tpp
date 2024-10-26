@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdexcept>
 
 template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T>
 size_t graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::vertex_count() const noexcept {

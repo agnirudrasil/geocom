@@ -1,0 +1,566 @@
+[
+ {
+  "closest_node": "13.0060395_74.7949166",
+  "description": "",
+  "id": "node/1866330465",
+  "name": "Suprabha",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0060395_74.7949166",
+  "description": "",
+  "id": "node/1866337511",
+  "name": "Ganesh",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0060395_74.7949166",
+  "description": "",
+  "id": "node/1866338258",
+  "name": "Iyengar Bakery",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0060395_74.7949166",
+  "description": "",
+  "id": "node/1866338471",
+  "name": "Students Cooperative",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0060395_74.7949166",
+  "description": "",
+  "id": "node/1866340008",
+  "name": "Canara Bank",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/1866342501",
+  "name": "Amul Shreyas",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/1866343117",
+  "name": "Sports Complex",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3365376156",
+  "name": "NITK Guest House Bus Stop",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655380894",
+  "name": "Mega Hostel - Tower 1",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381317",
+  "name": "Silver Jubliee Auditorium",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381445",
+  "name": "Post Office",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381451",
+  "name": "Department of Chemistry and Physics",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381488",
+  "name": "Central Computer Centrre",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381507",
+  "name": "Health Care Center",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/3655381894",
+  "name": "Department of Information Technology",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4274303392",
+  "name": "NITK Central Library",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447552231",
+  "name": "Nescafe",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447552232",
+  "name": "Sri Sai Hospitality Night Canteen",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447552234",
+  "name": "Health Subcenter",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447580805",
+  "name": "Tripthi Night Canteen",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447580833",
+  "name": "New Girls Hostel Block",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447580834",
+  "name": "Nandini",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447580835",
+  "name": "Crumbs",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4447580836",
+  "name": "NITK English Medium School",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4543009483",
+  "name": "Reddy's Store",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/4543009486",
+  "name": "Mega Mess",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/5269747333",
+  "name": "Sahyadri (7th Block)",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/5269747339",
+  "name": "Sports Ground",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/5338374874",
+  "name": "Statue of U. S. Mallya",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/6269599012",
+  "name": "Yennar Electricals",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/8187929876",
+  "name": "Canara Bank ATM",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11540257292",
+  "name": "Old Sports Complex",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11540257293",
+  "name": "NITK Old Gym",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11540257294",
+  "name": "Trishul (8th Block)",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11543452860",
+  "name": "NITK Main Building",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11543452861",
+  "name": "NITK Main Building",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11543452862",
+  "name": "Central Library",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11543452863",
+  "name": "Lecture Hall Complex - A (LHC -A)",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11745552206",
+  "name": "Lecture Hall Complex C (LHC-C)",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11745552207",
+  "name": "Department of Electrical and Electronics",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11745552208",
+  "name": "Department of Electronics and Communication",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11745552209",
+  "name": "Lecture Hall Complex - B (LHC -B)",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11745552211",
+  "name": "Gurushri Computers",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11751135834",
+  "name": "CIDS",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11751160032",
+  "name": "Pavilion",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/11752552234",
+  "name": "CSD",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ },
+ {
+  "closest_node": "13.0091594_74.7967614",
+  "description": "",
+  "id": "node/12008903628",
+  "name": "Nescafe",
+  "pocs": {
+   "email": "",
+   "name": "John Doe",
+   "phone": ""
+  },
+  "timings": "8:30am to 6:30pm"
+ }
+]

@@ -12,6 +12,7 @@
 class node {
 public:
     double lat;
+    
     double lon;
     double g_cost = 0;
     double h_cost = 0;
