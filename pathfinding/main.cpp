@@ -24,8 +24,10 @@ int main() {
     std::fstream f("/Users/agnirudrasil/Projects/geocom/pathfinding/example.json");
     graph_t g;
 
-    for (json d = json::parse(f); auto &feature: d["features"]) {
-        if (feature["geometry"]["type"] == "LineString") {
+    for (json d = json::parse(f); auto &feature : d["features"])
+    {
+        if (feature["geometry"]["type"] == "LineString")
+        {
             auto coordinates = feature["geometry"]["coordinates"];
             double lat, lon;
             std::tie(lat, lon) = get_lat_lon(coordinates[0]);
@@ -47,12 +49,12 @@ int main() {
 
     json j;
 
-    std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
-    node start(13.0124083, 74.7917972);
-    node end(13.0072809, 74.7970999);
-    astar astar(g);
-    auto path = astar.find_path(start, end);
-    j["path"] = path.value();
+    // std::cout << "Graph with " << g.vertex_count() << " vertices and " << g.edge_count() << " edges." << "\n";
+    // node start(13.0124083, 74.7917972);
+    // node end(13.0072809, 74.7970999);
+    // astar astar(g);
+    // auto path = astar.find_path(start, end);
+    // j["path"] = path.value();
 
-    std::cout << j << '\n';
+    // std::cout << j << '\n';
 }
