@@ -10,14 +10,13 @@
 #include "graph.h"
 #include "node.h"
 #include <vector>
-class astar
-{
+
+class astar {
     using graph_t = graph<node, edge, graph_type::UNDIRECTED, std::string>;
-    using path_t = std::vector<std::pair<double, double>>;
+    using path_t = std::vector<std::pair<double, double> >;
 
 public:
-    explicit astar(graph_t &g) : g{&g}
-    {
+    explicit astar(graph_t &g) : g{&g} {
     }
 
     std::optional<path_t> find_path(node &start, node &end) const;

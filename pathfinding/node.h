@@ -7,17 +7,19 @@
 #include <string>
 #include <format>
 #include <iostream>
+#include <__filesystem/path.h>
 
 
 class node {
 public:
-    double lat;
-    
-    double lon;
+    double lat{};
+    double lon{};
     double g_cost = 0;
     double h_cost = 0;
     node *parent{};
     std::string id;
+
+    node() = default;
 
     node(const double lat, const double lon): lat{lat}, lon{lon} {
         this->id = std::format("{}_{}", lat, lon);
@@ -27,30 +29,29 @@ public:
         return g_cost + h_cost;
     }
 
-
     friend bool operator==(const node &l, const node &r) {
         return l.id == r.id;
-    };
+    }
 
     friend bool operator!=(const node &l, const node &r) {
         return l.id != r.id;
-    };
+    }
 
     friend bool operator>(const node &l, const node &r) {
         return l.f_cost() > r.f_cost();
-    };
+    }
 
     friend bool operator>=(const node &l, const node &r) {
         return !(l.f_cost() < r.f_cost());
-    };
+    }
 
     friend bool operator<(const node &l, const node &r) {
         return l.f_cost() < r.f_cost();
-    };
+    }
 
     friend bool operator<=(const node &l, const node &r) {
         return !(l.f_cost() > r.f_cost());
-    };
+    }
 };
 
 template<>

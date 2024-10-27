@@ -8,24 +8,21 @@
 #include <unordered_set>
 #include <csignal>
 #include <cstdlib>
-enum class graph_type
-{
+
+enum class graph_type {
     DIRECTED,
     UNDIRECTED
 };
 
-struct pairhash
-{
-    template <typename T, typename U>
-    std::size_t operator()(const std::pair<T, U> &x) const
-    {
+struct pairhash {
+    template<typename T, typename U>
+    std::size_t operator()(const std::pair<T, U> &x) const {
         return std::hash<T>()(x.first) ^ std::hash<U>()(x.second);
     }
 };
 
-template <typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T = int>
-class graph
-{
+template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T = int>
+class graph {
     using vertex_id_t = VERTEX_ID_T;
     using vertex_t = VERTEX_T;
     using vertices_t = std::unordered_map<vertex_id_t, vertex_t>;
@@ -38,13 +35,11 @@ class graph
 public:
     graph() = default;
 
-    [[nodiscard]] static constexpr bool is_directed()
-    {
+    [[nodiscard]] static constexpr bool is_directed() {
         return GRAPH_TYPE == graph_type::DIRECTED;
     }
 
-    [[nodiscard]] static constexpr bool is_undirected()
-    {
+    [[nodiscard]] static constexpr bool is_undirected() {
         return GRAPH_TYPE == graph_type::UNDIRECTED;
     }
 
@@ -52,13 +47,11 @@ public:
 
     [[nodiscard]] size_t edge_count() const noexcept;
 
-    vertices_t &get_vertices() noexcept
-    {
+    vertices_t &get_vertices() noexcept {
         return vertices;
     }
 
-    edges_t &get_edges() const noexcept
-    {
+    edges_t &get_edges() const noexcept {
         return edges;
     }
 
@@ -66,8 +59,7 @@ public:
 
     [[nodiscard]] bool is_adjacent(const vertex_id_t &lhs, const vertex_id_t &rhs) const noexcept;
 
-    vertex_t &get_vertex(const vertex_id_t &vertex_id)
-    {
+    vertex_t &get_vertex(const vertex_id_t &vertex_id) {
         return vertices.at(vertex_id);
     }
 
@@ -90,23 +82,17 @@ private:
     edges_t edges{};
     std::unordered_map<vertex_id_t, vertices_set_t> adj_list{};
 
-    std::pair<vertex_id_t, vertex_id_t> get_sorted_id(vertex_id_t lhs, vertex_id_t rhs) const
-    {
-        if (lhs < rhs)
-        {
+    std::pair<vertex_id_t, vertex_id_t> get_sorted_id(vertex_id_t lhs, vertex_id_t rhs) const {
+        if (lhs < rhs) {
             return std::make_pair(lhs, rhs);
         }
         return std::make_pair(rhs, lhs);
     }
 
-    std::pair<vertex_id_t, vertex_id_t> get_edge_id(vertex_id_t lhs, vertex_id_t rhs) const
-    {
-        if constexpr (GRAPH_TYPE == graph_type::UNDIRECTED)
-        {
+    std::pair<vertex_id_t, vertex_id_t> get_edge_id(vertex_id_t lhs, vertex_id_t rhs) const {
+        if constexpr (GRAPH_TYPE == graph_type::UNDIRECTED) {
             return get_sorted_id(lhs, rhs);
-        }
-        else if constexpr (GRAPH_TYPE == graph_type::DIRECTED)
-        {
+        } else if constexpr (GRAPH_TYPE == graph_type::DIRECTED) {
             return std::make_pair(lhs, rhs);
         }
 

@@ -6,7 +6,6 @@
 #define UTILS_H
 
 #define R 6371
-#include <numbers>
 
 #include "node.h"
 

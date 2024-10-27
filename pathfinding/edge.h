@@ -10,6 +10,8 @@ class edge {
     int weight = 0;
 
 public:
+    edge() = default;
+
     explicit edge(const int weight) : weight{weight} {
     }
 };
