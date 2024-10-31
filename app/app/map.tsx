@@ -5,24 +5,39 @@ import MapView, { Geojson, Marker } from "react-native-maps";
 import { useEffect, useRef, useState } from "react";
 import { useTheme, H2, YStack, Button, YGroup, Separator } from "tamagui";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { MapPin, Navigation, PlusCircle } from "@tamagui/lucide-icons";
+import { MapPin, Navigation } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";
+import { useLocalSearchParams } from "expo-router";
+import { SearchModal } from "@/components/search-modal";
+
+interface IdName {
+    id: string;
+    name: string;
+}
 
 export default function TabOneScreen() {
     const [position, setPosition] = useState(0);
     const theme = useTheme();
+    const { poi } = useLocalSearchParams<{ poi?: string }>();
 
     const mapRef = useRef<MapView>(null);
     const sheetRef = useRef<BottomSheet>(null);
-
-    const from = "11540257294";
-    const to = "11745552207";
+    const [from, setFrom] = useState<IdName | null>(null);
+    const [to, setTo] = useState<IdName | null>(
+        poi ? (JSON.parse(poi) as IdName) : null
+    );
 
     const { data } = useQuery({
         queryKey: ["directions", from, to],
+        enabled: Boolean(from) && Boolean(to),
         queryFn: async ({ queryKey }) => {
+            if (!queryKey[1] || !queryKey[2]) {
+                return;
+            }
             const response = await fetch(
-                `${process.env.EXPO_PUBLIC_API_URL}/path?from=${queryKey[1]}&to=${queryKey[2]}`
+                `${process.env.EXPO_PUBLIC_API_URL}/path?from=${
+                    (queryKey[1] as IdName).id
+                }&to=${(queryKey[2] as IdName).id}`
             );
             return response.json() as Promise<{
                 path: number[][];
@@ -32,8 +47,17 @@ export default function TabOneScreen() {
         },
     });
 
+    const [open, setOpen] = useState<"from" | "to" | null>(null);
+
+    useEffect(() => {
+        setTimeout(() => {
+            sheetRef.current?.expand();
+        }, 10);
+    }, []);
+
     useEffect(() => {
         if (data) {
+            console.log(data);
             const minLat = Math.min(...data.path.map(c => c[0]));
             const maxLat = Math.max(...data.path.map(c => c[0]));
             const maxLon = Math.max(...data.path.map(c => c[1]));
@@ -52,6 +76,17 @@ export default function TabOneScreen() {
 
     return (
         <View>
+            <SearchModal
+                onChange={poi => {
+                    if (open === "from") {
+                        setFrom(poi);
+                    } else {
+                        setTo(poi);
+                    }
+                }}
+                open={Boolean(open)}
+                setOpen={() => setOpen(null)}
+            />
             <MapView ref={mapRef} style={styles.map}>
                 {data && (
                     <Marker
@@ -101,6 +136,7 @@ export default function TabOneScreen() {
                     backgroundColor: theme.accentColor.val,
                 }}
                 snapPoints={["15%", "50%"]}
+                index={1}
                 onChange={index => setPosition(index)}
                 enableDynamicSizing={false}
                 ref={sheetRef}
@@ -125,8 +161,9 @@ export default function TabOneScreen() {
                                             jc="flex-start"
                                             icon={Navigation}
                                             width="100%"
+                                            onPress={() => setOpen("from")}
                                         >
-                                            From
+                                            {from ? from.name : "From"}
                                         </Button>
                                     </YGroup.Item>
                                     <YGroup.Item>
@@ -135,18 +172,9 @@ export default function TabOneScreen() {
                                             jc="flex-start"
                                             chromeless
                                             width="100%"
+                                            onPress={() => setOpen("to")}
                                         >
-                                            To
-                                        </Button>
-                                    </YGroup.Item>
-                                    <YGroup.Item>
-                                        <Button
-                                            chromeless
-                                            jc="flex-start"
-                                            icon={PlusCircle}
-                                            width="100%"
-                                        >
-                                            Add Stop
+                                            {to ? to.name : "From"}
                                         </Button>
                                     </YGroup.Item>
                                 </YGroup>

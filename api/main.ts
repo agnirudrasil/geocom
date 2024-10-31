@@ -1,6 +1,17 @@
 import { Application } from "jsr:@oak/oak/application";
 import { Router } from "jsr:@oak/oak/router";
 import { Client } from "https://deno.land/x/postgres/mod.ts";
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+
+const stuff = require("./pathfinding.js");
+
+const pathfinding = await stuff();
+
+const text = await Deno.readTextFile("example.json");
+
+const graph = pathfinding.API.initialize_graph(text);
 
 const client = new Client({
     user: "agnirudrasil",
@@ -65,6 +76,13 @@ router.get("/path", async ctx => {
         ],
     }).output();
     console.log(from, to);
+    const start = new pathfinding.node(from[0], from[1]);
+    const end = new pathfinding.node(to[0], to[1]);
+    const path_ = pathfinding.API.find_path(graph, start, end);
+    console.log(path_);
+    for (let i = 0; i < path_.size(); i++) {
+        console.log("Vector Value: ", path_.get(i));
+    }
     const out = td.decode(p.stdout).trim();
     const err = td.decode(p.stderr).trim();
     if (err) {

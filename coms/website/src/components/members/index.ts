@@ -1,1 +1,0 @@
-export { MembarsBar } from "./MembersBar";

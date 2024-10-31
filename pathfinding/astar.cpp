@@ -69,3 +69,5 @@ astar::path_t astar::retrace_path(node &start, node &end) {
     // std::ranges::views::reverse(path);
     return path;
 }
+
+

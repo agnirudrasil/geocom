@@ -1,15 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { Platform, StyleSheet } from "react-native";
 
-import { Text, View } from "@/components/Themed";
-import { Link, Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { View } from "@/components/Themed";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import {
     Button,
-    H3,
     H6,
     ListItem,
-    ListItemFrame,
     ListItemSubtitle,
     ListItemText,
     Paragraph,
@@ -18,7 +16,7 @@ import {
 } from "tamagui";
 
 export default function ModalScreen() {
-    const { poi } = useLocalSearchParams<{ poi: string }>();
+    const { poi } = useLocalSearchParams<{ poi?: string }>();
     const { data } = useQuery({
         queryKey: ["poi", poi],
         queryFn: async ({ queryKey }) => {
@@ -56,7 +54,7 @@ export default function ModalScreen() {
                 <H6>Points of Contacts</H6>
                 <YStack flexGrow={1}>
                     {data?.pocs.map(poc => (
-                        <ListItem>
+                        <ListItem key={poc.name}>
                             <ListItemText>
                                 <SizableText>{poc.name}</SizableText>
                             </ListItemText>
@@ -68,7 +66,14 @@ export default function ModalScreen() {
                 <Button
                     onPress={() => {
                         router.dismiss();
-                        router.push("/map");
+                        router.push(
+                            `/map?poi=${encodeURIComponent(
+                                JSON.stringify({
+                                    id: data?.id,
+                                    name: data?.name,
+                                })
+                            )}`
+                        );
                     }}
                     theme="green"
                 >

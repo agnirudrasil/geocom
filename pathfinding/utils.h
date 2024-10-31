@@ -5,7 +5,6 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#define R 6371
 
 #include "node.h"
 

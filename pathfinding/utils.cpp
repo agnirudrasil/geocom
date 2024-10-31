@@ -5,6 +5,8 @@
 #include <numbers>
 #include "utils.h"
 
+#define R 6371
+
 double deg2rad(double deg) {
     return deg * (std::numbers::pi_v<double> / 180);
 }
