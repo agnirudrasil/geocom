@@ -1,0 +1,3 @@
+[submodule "avault"]
+	path = avault
+	url = https://github.com/agnirudrasil/avault
