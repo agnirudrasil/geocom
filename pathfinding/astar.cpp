@@ -5,7 +5,6 @@
 #include "astar.h"
 
 #include <unordered_set>
-#include <numbers>
 #include "heap.h"
 #include "utils.h"
 

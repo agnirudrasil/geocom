@@ -9,6 +9,7 @@ import { MapPin, Navigation } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
 import { SearchModal } from "@/components/search-modal";
+import { MapIndicators } from "@/components/MapIndicators";
 
 interface IdName {
     id: string;
@@ -39,6 +40,9 @@ export default function TabOneScreen() {
                     (queryKey[1] as IdName).id
                 }&to=${(queryKey[2] as IdName).id}`
             );
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
             return response.json() as Promise<{
                 path: number[][];
                 from: number[];
@@ -49,26 +53,29 @@ export default function TabOneScreen() {
 
     const [open, setOpen] = useState<"from" | "to" | null>(null);
 
-    useEffect(() => {
-        setTimeout(() => {
-            sheetRef.current?.expand();
-        }, 10);
-    }, []);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         sheetRef.current?.expand();
+    //     }, 10);
+    // }, []);
 
     useEffect(() => {
         if (data) {
-            console.log(data);
-            const minLat = Math.min(...data.path.map(c => c[0]));
-            const maxLat = Math.max(...data.path.map(c => c[0]));
-            const maxLon = Math.max(...data.path.map(c => c[1]));
-            const minLon = Math.min(...data.path.map(c => c[1]));
-            mapRef.current?.animateToRegion({
-                latitude: (minLat + maxLat) / 2,
-                longitude: (minLon + maxLon) / 2,
-                latitudeDelta: Math.abs(minLat - maxLat) * 1.5,
-                longitudeDelta: Math.abs(minLon - maxLon) * 1.25,
-            });
-            sheetRef.current?.collapse();
+            mapRef.current?.fitToCoordinates(
+                data.path.map(([lat, lon]) => ({
+                    latitude: lat,
+                    longitude: lon,
+                })),
+                {
+                    edgePadding: {
+                        top: 100,
+                        bottom: 100,
+                        left: 100,
+                        right: 100,
+                    },
+                    animated: true,
+                }
+            );
         } else {
             sheetRef.current?.expand();
         }
@@ -87,46 +94,25 @@ export default function TabOneScreen() {
                 open={Boolean(open)}
                 setOpen={() => setOpen(null)}
             />
-            <MapView ref={mapRef} style={styles.map}>
-                {data && (
-                    <Marker
-                        coordinate={{
-                            latitude: data.from[0],
-                            longitude: data.from[1],
-                        }}
-                    />
-                )}
-                {data && (
-                    <Marker
-                        coordinate={{
-                            latitude: data.to[0],
-                            longitude: data.to[1],
-                        }}
-                    />
-                )}
-                {data && data.path.length && (
-                    <Geojson
-                        strokeWidth={3}
-                        strokeColor="#00f"
-                        geojson={{
-                            type: "FeatureCollection",
-                            features: [
-                                {
-                                    type: "Feature",
-                                    properties: {
-                                        id: "line1",
-                                    },
-                                    geometry: {
-                                        type: "LineString",
-                                        coordinates: data.path.map(c =>
-                                            c.toReversed()
-                                        ),
-                                    },
-                                },
-                            ],
-                        }}
-                    />
-                )}
+            <MapView
+                ref={mapRef}
+                style={styles.map}
+                onLayout={() => {
+                    if (data) {
+                        console.log("Running");
+                        mapRef.current?.fitToCoordinates(
+                            data.path.map(([lat, lon]) => ({
+                                latitude: lat,
+                                longitude: lon,
+                            })),
+                            {
+                                animated: true,
+                            }
+                        );
+                    }
+                }}
+            >
+                <MapIndicators data={data} />
             </MapView>
             <BottomSheet
                 backgroundStyle={{
@@ -178,7 +164,33 @@ export default function TabOneScreen() {
                                         </Button>
                                     </YGroup.Item>
                                 </YGroup>
-                                <Button theme="green" width="100%">
+                                <Button
+                                    onPress={() => {
+                                        sheetRef.current?.collapse();
+                                        mapRef.current?.animateToRegion(
+                                            {
+                                                latitude: data?.from[0] || 0,
+                                                longitude: data?.from[1] || 0,
+                                                latitudeDelta: 0.00001,
+                                                longitudeDelta: 0.00001,
+                                            },
+                                            300
+                                        );
+                                        setTimeout(() => {
+                                            mapRef.current?.animateCamera({
+                                                center: {
+                                                    latitude:
+                                                        data?.from[0] || 0,
+                                                    longitude:
+                                                        data?.from[1] || 0,
+                                                },
+                                                heading: -90,
+                                            });
+                                        }, 500);
+                                    }}
+                                    theme="green"
+                                    width="100%"
+                                >
                                     Go!
                                 </Button>
                             </>

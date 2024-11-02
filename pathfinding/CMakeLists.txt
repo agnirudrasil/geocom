@@ -21,7 +21,9 @@ add_executable(pathfinding main.cpp
         heap.tpp
         utils.h
         utils.cpp
+        bind.cpp
+        bind.h
 )
 
-set_target_properties(pathfinding PROPERTIES LINK_FLAGS "--bind -sMODULARIZE=1")
+target_link_options(pathfinding PRIVATE --emit-tsd pathfinding.d.ts --bind -sENVIRONMENT=node)
 target_link_libraries(pathfinding PRIVATE nlohmann_json::nlohmann_json)

@@ -1,6 +1,13 @@
 #pragma once
 
 template<typename T, typename Compare>
+heap<T, Compare>::heap(std::initializer_list<T> elements) {
+    m_heap.reserve(elements.size());
+    for (auto el: elements) m_heap.push_back(el);
+    heapify();
+}
+
+template<typename T, typename Compare>
 void heap<T, Compare>::push(T &element) {
     m_heap.push_back(element);
     sort_down(0, m_heap.size() - 1);
