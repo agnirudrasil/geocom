@@ -1,15 +1,26 @@
 import { Animated, StyleSheet, useAnimatedValue } from "react-native";
 
 import { View } from "@/components/Themed";
-import MapView, { Geojson, Marker } from "react-native-maps";
+import MapView from "react-native-maps";
 import { useEffect, useRef, useState } from "react";
-import { useTheme, H2, YStack, Button, YGroup, Separator } from "tamagui";
+import {
+    useTheme,
+    H2,
+    YStack,
+    Button,
+    YGroup,
+    Separator,
+    XStack,
+    Label,
+} from "tamagui";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { MapPin, Navigation } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalSearchParams } from "expo-router";
 import { SearchModal } from "@/components/search-modal";
 import { MapIndicators } from "@/components/MapIndicators";
+import { PathfindingAnimation } from "@/types/pathfinding-animation";
+import { Dropdown } from "@/components/select";
 
 interface IdName {
     id: string;
@@ -18,6 +29,7 @@ interface IdName {
 
 export default function TabOneScreen() {
     const [position, setPosition] = useState(0);
+    const [algo, setAlgo] = useState("astar");
     const theme = useTheme();
     const { poi } = useLocalSearchParams<{ poi?: string }>();
 
@@ -29,7 +41,7 @@ export default function TabOneScreen() {
     );
 
     const { data } = useQuery({
-        queryKey: ["directions", from, to],
+        queryKey: ["directions", from, to, algo],
         enabled: Boolean(from) && Boolean(to),
         queryFn: async ({ queryKey }) => {
             if (!queryKey[1] || !queryKey[2]) {
@@ -38,16 +50,12 @@ export default function TabOneScreen() {
             const response = await fetch(
                 `${process.env.EXPO_PUBLIC_API_URL}/path?from=${
                     (queryKey[1] as IdName).id
-                }&to=${(queryKey[2] as IdName).id}`
+                }&to=${(queryKey[2] as IdName).id}&algo=${queryKey[3]}`
             );
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
-            return response.json() as Promise<{
-                path: number[][];
-                from: number[];
-                to: number[];
-            }>;
+            return response.json() as Promise<PathfindingAnimation>;
         },
     });
 
@@ -59,7 +67,7 @@ export default function TabOneScreen() {
     useEffect(() => {
         if (data)
             animationRef.current = Animated.timing(animatedIndex, {
-                toValue: 57,
+                toValue: data.steps.length - 1,
                 duration: 5000,
                 useNativeDriver: true,
             });
@@ -75,29 +83,23 @@ export default function TabOneScreen() {
         };
     }, [animatedIndex]);
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         sheetRef.current?.expand();
-    //     }, 10);
-    // }, []);
-
     useEffect(() => {
         if (data) {
-            mapRef.current?.fitToCoordinates(
-                data.path.map(([lat, lon]) => ({
+            const allCoordinates = [
+                ...data.path.map(([lat, lon]) => ({
                     latitude: lat,
                     longitude: lon,
                 })),
-                {
-                    edgePadding: {
-                        top: 100,
-                        bottom: 100,
-                        left: 100,
-                        right: 100,
-                    },
-                    animated: true,
-                }
-            );
+            ];
+            mapRef.current?.fitToCoordinates(allCoordinates, {
+                edgePadding: {
+                    top: 30,
+                    bottom: 100,
+                    left: 30,
+                    right: 30,
+                },
+                animated: true,
+            });
         } else {
             sheetRef.current?.expand();
         }
@@ -134,7 +136,13 @@ export default function TabOneScreen() {
                     }
                 }}
             >
-                <MapIndicators index={index} data={data} />
+                {data && (
+                    <MapIndicators
+                        map={mapRef.current!}
+                        index={index}
+                        data={data}
+                    />
+                )}
             </MapView>
             <BottomSheet
                 backgroundStyle={{
@@ -153,7 +161,7 @@ export default function TabOneScreen() {
                     <YStack padding="$3" gap="$4">
                         <H2>Directions</H2>
                         {position > 0 && (
-                            <>
+                            <YStack gap="$2">
                                 <YGroup
                                     borderRadius="$2"
                                     padding="$1.5"
@@ -191,33 +199,32 @@ export default function TabOneScreen() {
                                         sheetRef.current?.collapse();
                                         animationRef.current?.reset();
                                         animationRef.current?.start();
-                                        // mapRef.current?.animateToRegion(
-                                        //     {
-                                        //         latitude: data?.from[0] || 0,
-                                        //         longitude: data?.from[1] || 0,
-                                        //         latitudeDelta: 0.00001,
-                                        //         longitudeDelta: 0.00001,
-                                        //     },
-                                        //     300
-                                        // );
-                                        // setTimeout(() => {
-                                        //     mapRef.current?.animateCamera({
-                                        //         center: {
-                                        //             latitude:
-                                        //                 data?.from[0] || 0,
-                                        //             longitude:
-                                        //                 data?.from[1] || 0,
-                                        //         },
-                                        //         heading: -90,
-                                        //     });
-                                        // }, 500);
                                     }}
                                     theme="green"
                                     width="100%"
                                 >
                                     Go!
                                 </Button>
-                            </>
+                                <XStack>
+                                    <Label f={1} miw={80}>
+                                        Algorithm
+                                    </Label>
+                                    <Dropdown
+                                        value={algo}
+                                        onValueChange={setAlgo}
+                                        items={[
+                                            {
+                                                name: "A*",
+                                                value: "astar",
+                                            },
+                                            {
+                                                name: "Dijkstra",
+                                                value: "dijkstra",
+                                            },
+                                        ]}
+                                    />
+                                </XStack>
+                            </YStack>
                         )}
                     </YStack>
                 </BottomSheetView>

@@ -1,61 +1,47 @@
-import {
-    Accuracy,
-    LocationObjectCoords,
-    LocationSubscription,
-    requestForegroundPermissionsAsync,
-    watchPositionAsync,
-} from "expo-location";
-import { useEffect, useState } from "react";
-import { Marker, Polyline } from "react-native-maps";
-import data from "@/app/animation.json";
+import { PathfindingAnimation } from "@/types/pathfinding-animation";
+import { getAllCoordinates } from "@/utils/rotation";
+import { useEffect } from "react";
+import MapView, { Marker, Polyline } from "react-native-maps";
+import { AnimatedPolyline } from "./animated-polyline";
 
 export const MapIndicators = ({
     index,
+    map,
+    data,
 }: {
-    data: {
-        from: number[];
-        to: number[];
-        path: number[][];
-    };
+    data: PathfindingAnimation;
     index: number;
+    map: MapView;
 }) => {
-    const [location, setLocation] = useState<LocationObjectCoords | null>(null);
-
     useEffect(() => {
-        let subscription: LocationSubscription | null = null;
+        let coordinates;
+        if (index === data.steps.length - 1) {
+            coordinates = getAllCoordinates({ ...data, steps: [] });
+        } else {
+            coordinates = getAllCoordinates({
+                ...data,
+                steps: data.steps.slice(0, index + 1),
+            });
+        }
 
-        (async () => {
-            const { status } = await requestForegroundPermissionsAsync();
-            if (status === "granted") {
-                subscription = await watchPositionAsync(
-                    { accuracy: Accuracy.BestForNavigation },
-                    ({ coords }) => {
-                        setLocation(coords);
-                    }
-                );
-            } else {
-                console.log("Location permissions not granted");
-            }
-        })();
-
-        return () => {
-            subscription?.remove();
-        };
-    }, []);
-
+        map.fitToCoordinates(coordinates, {
+            edgePadding: { top: 30, right: 30, bottom: 100, left: 30 },
+        });
+    }, [index]);
     return (
         <>
             <Marker
-                coordinate={{
-                    latitude: 13.0095455,
-                    longitude: 74.7950478,
-                }}
+                coordinate={{ latitude: data.from[0], longitude: data.from[1] }}
+            />
+            <Marker
+                coordinate={{ latitude: data.to[0], longitude: data.to[1] }}
             />
             {data.steps.slice(0, index + 1).map((step, i) =>
                 step.children.map((child, j) => (
                     <Polyline
+                        key={`${i}-${j}`}
                         strokeWidth={4}
-                        strokeColor="red"
+                        strokeColor="rgba(96, 125, 139, 0.7)"
                         coordinates={[
                             {
                                 latitude: step.parent[0],
@@ -69,16 +55,15 @@ export const MapIndicators = ({
                     />
                 ))
             )}
-            {data && data.path.length && index >= 57 && (
-                <Polyline
-                    strokeWidth={6}
-                    strokeColor="#4CAF50"
-                    coordinates={data.path.map((point: number[]) => ({
-                        latitude: point[0],
-                        longitude: point[1],
-                    }))}
-                />
-            )}
+            <AnimatedPolyline
+                play={index >= data.steps.length - 1}
+                strokeWidth={6}
+                strokeColor="#81c784"
+                coordinates={data.path.map((point: number[]) => ({
+                    latitude: point[0],
+                    longitude: point[1],
+                }))}
+            />
         </>
     );
 };

@@ -14,8 +14,8 @@ add_executable(pathfinding main.cpp
         heap.h
         graph.h
         node.h
-        astar.cpp
-        astar.h
+        pathfinding.tpp
+        pathfinding.h
         graph.tpp
         edge.h
         heap.tpp
@@ -23,7 +23,8 @@ add_executable(pathfinding main.cpp
         utils.cpp
         bind.cpp
         bind.h
+        node_visitor.h
 )
 
-#target_link_options(pathfinding PRIVATE --emit-tsd pathfinding.d.ts --bind -sMODULARIZE=1 -sENVIRONMENT=node)
+target_link_options(pathfinding PRIVATE --emit-tsd pathfinding.d.ts --bind -sMODULARIZE=1 -sENVIRONMENT=node)
 target_link_libraries(pathfinding PRIVATE nlohmann_json::nlohmann_json)

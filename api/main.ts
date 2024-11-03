@@ -50,6 +50,7 @@ router.get("/pois/:id", async ctx => {
 });
 
 router.get("/path", async ctx => {
+    const algo = ctx.request.url.searchParams.get("algo");
     const fromId = ctx.request.url.searchParams.get("from");
     const toId = ctx.request.url.searchParams.get("to");
     const { rows } = await client.queryObject<{ closest_coords: number[] }>`
@@ -66,27 +67,15 @@ router.get("/path", async ctx => {
         WHERE id = ${toId}
         `;
     const to = rowsTo[0]?.closest_coords;
-    const td = new TextDecoder();
-    const p = await new Deno.Command("./pathfinding", {
-        args: [
-            "./example.json",
-            ...from.map(s => s.toString()),
-            ...to.map(s => s.toString()),
-        ],
-    }).output();
     console.log(from, to);
     const start = new node(from[0], from[1]);
     const end = new node(to[0], to[1]);
-    // const _path = API.find_path(graph, start, end);
-    // console.log(JSON.parse(_path));
-    const out = td.decode(p.stdout).trim();
-    const err = td.decode(p.stderr).trim();
-    if (err) {
-        console.error("Error in pathfinding", err);
-        ctx.response.status = 500;
-        ctx.response.body = { error: err };
+    let path;
+    if (algo === "dijkstra") {
+        path = JSON.parse(API.djikstra_find_path(graph, start, end));
+    } else {
+        path = JSON.parse(API.astar_find_path(graph, start, end));
     }
-    const path = JSON.parse(out);
     ctx.response.body = { ...path, from, to };
 });
 
