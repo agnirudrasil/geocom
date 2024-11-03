@@ -5,6 +5,8 @@
 #include <numbers>
 #include "utils.h"
 
+#include <nlohmann/json.hpp>
+
 #define R 6371
 
 double deg2rad(double deg) {
@@ -21,4 +23,37 @@ double distance(const node *node1, const node *node2) {
     const auto c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
     return R * c;
+}
+
+std::tuple<double, double> get_lat_lon(const nlohmann::basic_json<> &coords) {
+    double lon = coords[0].get<double>();
+    double lat = coords[1].get<double>();
+
+    return std::make_tuple(lat, lon);
+}
+
+std::vector<double> get_lat_lon(const std::pair<double, double> &coords) {
+    const double lat = coords.first;
+    const double lon = coords.second;
+
+    std::vector vector_coords = {lat, lon};
+
+    return vector_coords;
+}
+
+std::vector<double> get_lat_lon(double lat, double lon) {
+    std::vector vector_coords = {lat, lon};
+    return vector_coords;
+}
+
+std::vector<double> get_lat_lon(const node &node) {
+    std::vector vector_coords = {node.lat, node.lon};
+
+    return vector_coords;
+}
+
+std::vector<double> get_lat_lon(const node *node) {
+    std::vector vector_coords = {node->lat, node->lon};
+
+    return vector_coords;
 }

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Animated, StyleSheet, useAnimatedValue } from "react-native";
 
 import { View } from "@/components/Themed";
 import MapView, { Geojson, Marker } from "react-native-maps";
@@ -52,6 +52,28 @@ export default function TabOneScreen() {
     });
 
     const [open, setOpen] = useState<"from" | "to" | null>(null);
+    const animatedIndex = useAnimatedValue(0);
+    const [index, setIndex] = useState(0);
+    const animationRef = useRef<Animated.CompositeAnimation | null>(null);
+
+    useEffect(() => {
+        if (data)
+            animationRef.current = Animated.timing(animatedIndex, {
+                toValue: 57,
+                duration: 5000,
+                useNativeDriver: true,
+            });
+    }, [animatedIndex, data]);
+
+    useEffect(() => {
+        animatedIndex.addListener(({ value }) => {
+            setIndex(value);
+        });
+
+        return () => {
+            animatedIndex.removeAllListeners();
+        };
+    }, [animatedIndex]);
 
     // useEffect(() => {
     //     setTimeout(() => {
@@ -112,7 +134,7 @@ export default function TabOneScreen() {
                     }
                 }}
             >
-                <MapIndicators data={data} />
+                <MapIndicators index={index} data={data} />
             </MapView>
             <BottomSheet
                 backgroundStyle={{
@@ -167,26 +189,28 @@ export default function TabOneScreen() {
                                 <Button
                                     onPress={() => {
                                         sheetRef.current?.collapse();
-                                        mapRef.current?.animateToRegion(
-                                            {
-                                                latitude: data?.from[0] || 0,
-                                                longitude: data?.from[1] || 0,
-                                                latitudeDelta: 0.00001,
-                                                longitudeDelta: 0.00001,
-                                            },
-                                            300
-                                        );
-                                        setTimeout(() => {
-                                            mapRef.current?.animateCamera({
-                                                center: {
-                                                    latitude:
-                                                        data?.from[0] || 0,
-                                                    longitude:
-                                                        data?.from[1] || 0,
-                                                },
-                                                heading: -90,
-                                            });
-                                        }, 500);
+                                        animationRef.current?.reset();
+                                        animationRef.current?.start();
+                                        // mapRef.current?.animateToRegion(
+                                        //     {
+                                        //         latitude: data?.from[0] || 0,
+                                        //         longitude: data?.from[1] || 0,
+                                        //         latitudeDelta: 0.00001,
+                                        //         longitudeDelta: 0.00001,
+                                        //     },
+                                        //     300
+                                        // );
+                                        // setTimeout(() => {
+                                        //     mapRef.current?.animateCamera({
+                                        //         center: {
+                                        //             latitude:
+                                        //                 data?.from[0] || 0,
+                                        //             longitude:
+                                        //                 data?.from[1] || 0,
+                                        //         },
+                                        //         heading: -90,
+                                        //     });
+                                        // }, 500);
                                     }}
                                     theme="green"
                                     width="100%"

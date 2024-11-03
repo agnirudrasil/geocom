@@ -25,5 +25,5 @@ add_executable(pathfinding main.cpp
         bind.h
 )
 
-target_link_options(pathfinding PRIVATE --emit-tsd pathfinding.d.ts --bind -sENVIRONMENT=node)
+#target_link_options(pathfinding PRIVATE --emit-tsd pathfinding.d.ts --bind -sMODULARIZE=1 -sENVIRONMENT=node)
 target_link_libraries(pathfinding PRIVATE nlohmann_json::nlohmann_json)

@@ -6,13 +6,18 @@ import {
     watchPositionAsync,
 } from "expo-location";
 import { useEffect, useState } from "react";
-import { Marker, Geojson } from "react-native-maps";
+import { Marker, Polyline } from "react-native-maps";
+import data from "@/app/animation.json";
 
 export const MapIndicators = ({
-    data,
+    index,
 }: {
-    data: any;
-    setRegion: (coords: LocationObjectCoords) => any;
+    data: {
+        from: number[];
+        to: number[];
+        path: number[][];
+    };
+    index: number;
 }) => {
     const [location, setLocation] = useState<LocationObjectCoords | null>(null);
 
@@ -40,45 +45,38 @@ export const MapIndicators = ({
 
     return (
         <>
-            {data && (
-                <Marker
-                    coordinate={{
-                        latitude: data.to[0],
-                        longitude: data.to[1],
-                    }}
-                />
-            )}
-            {data && data.path.length && (
-                <Geojson
-                    strokeWidth={5}
-                    strokeColor="#4CAF50"
-                    geojson={{
-                        type: "FeatureCollection",
-                        features: [
+            <Marker
+                coordinate={{
+                    latitude: 13.0095455,
+                    longitude: 74.7950478,
+                }}
+            />
+            {data.steps.slice(0, index + 1).map((step, i) =>
+                step.children.map((child, j) => (
+                    <Polyline
+                        strokeWidth={4}
+                        strokeColor="red"
+                        coordinates={[
                             {
-                                type: "Feature",
-                                properties: {
-                                    id: "line1",
-                                },
-                                geometry: {
-                                    type: "LineString",
-                                    coordinates: data.path.map(c =>
-                                        c.toReversed()
-                                    ),
-                                },
+                                latitude: step.parent[0],
+                                longitude: step.parent[1],
                             },
-                        ],
-                    }}
-                />
+                            {
+                                latitude: child[0],
+                                longitude: child[1],
+                            },
+                        ]}
+                    />
+                ))
             )}
-            {location && (
-                <Marker
-                    coordinate={{
-                        latitude: location.latitude,
-                        longitude: location.longitude,
-                    }}
-                    flat
-                    image={require("../assets/images/pin.png")}
+            {data && data.path.length && index >= 57 && (
+                <Polyline
+                    strokeWidth={6}
+                    strokeColor="#4CAF50"
+                    coordinates={data.path.map((point: number[]) => ({
+                        latitude: point[0],
+                        longitude: point[1],
+                    }))}
                 />
             )}
         </>

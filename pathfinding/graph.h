@@ -92,13 +92,17 @@ public:
      * @brief Gets a reference to the container of vertices.
      * @return A reference to the vertices container.
      */
-    vertices_t &get_vertices() noexcept;
+    vertices_t &get_vertices() noexcept {
+        return vertices;
+    };
 
     /**
      * @brief Gets a reference to the container of edges.
      * @return A reference to the edges container.
      */
-    edges_t &get_edges() const noexcept;
+    edges_t &get_edges() const noexcept {
+        return edges;
+    };
 
     /**
      * @brief Checks if a vertex exists in the graph.
@@ -121,7 +125,9 @@ public:
      * @return A reference to the vertex.
      * @throws std::out_of_range if the vertex does not exist.
      */
-    vertex_t &get_vertex(const vertex_id_t &vertex_id);
+    vertex_t &get_vertex(const vertex_id_t &vertex_id) {
+        return vertices.at(vertex_id);
+    };
 
     /**
      * @brief Gets an edge by its vertices' IDs.

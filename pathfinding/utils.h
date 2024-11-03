@@ -5,6 +5,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <nlohmann/json.hpp>
 #include "node.h"
 
 /**
@@ -23,5 +24,16 @@ double deg2rad(double deg);
  * @return The Haversine distance between the two nodes.
  */
 double distance(const node *node1, const node *node2);
+
+
+std::tuple<double, double> get_lat_lon(const nlohmann::basic_json<> &coords);
+
+std::vector<double> get_lat_lon(const std::pair<double, double> &coords);
+
+std::vector<double> get_lat_lon(double lat, double lon);
+
+std::vector<double> get_lat_lon(const node &node);
+
+std::vector<double> get_lat_lon(const node *node);
 
 #endif //UTILS_H

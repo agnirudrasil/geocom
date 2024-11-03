@@ -102,3 +102,28 @@ void graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::remove_edge(vertex_id_t &
         adj_list[rhs].insert(lhs);
     }
 }
+
+template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T>
+std::pair<typename graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::vertex_id_t, typename graph<VERTEX_T, EDGE_T,
+    GRAPH_TYPE, VERTEX_ID_T>::vertex_id_t> graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::get_sorted_id(
+    vertex_id_t lhs,
+    vertex_id_t rhs) const {
+    if (lhs < rhs) {
+        return std::make_pair(lhs, rhs);
+    }
+    return std::make_pair(rhs, lhs);
+}
+
+template<typename VERTEX_T, typename EDGE_T, graph_type GRAPH_TYPE, typename VERTEX_ID_T>
+std::pair<typename graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::vertex_id_t, typename graph<VERTEX_T, EDGE_T,
+    GRAPH_TYPE, VERTEX_ID_T>::vertex_id_t> graph<VERTEX_T, EDGE_T, GRAPH_TYPE, VERTEX_ID_T>::get_edge_id(
+    vertex_id_t lhs,
+    vertex_id_t rhs) const {
+    if constexpr (GRAPH_TYPE == graph_type::UNDIRECTED) {
+        return get_sorted_id(lhs, rhs);
+    } else if constexpr (GRAPH_TYPE == graph_type::DIRECTED) {
+        return std::make_pair(lhs, rhs);
+    }
+
+    std::abort();
+}

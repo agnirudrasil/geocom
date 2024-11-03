@@ -5,7 +5,6 @@
 #ifndef NODE_H
 #define NODE_H
 #include <string>
-#include <format>
 #include <iostream>
 
 /**
@@ -32,14 +31,18 @@ public:
      * @param lat The latitude of the node.
      * @param lon The longitude of the node.
      */
-    node(const double lat, const double lon);
+    node(const double lat, const double lon): lat{lat}, lon{lon} {
+        this->id = std::format("{}_{}", lat, lon);
+    }
 
     /**
      * @brief Calculates the total estimated cost (f_cost) of this node.
      *
      * @return The sum of g_cost and h_cost.
      */
-    [[nodiscard]] double f_cost() const noexcept;
+    [[nodiscard]] double f_cost() const noexcept {
+        return g_cost + h_cost;
+    };
 
     /**
      * @brief Equality operator to compare two nodes based on their IDs.
@@ -48,7 +51,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the IDs are equal, false otherwise.
      */
-    friend bool operator==(const node &l, const node &r);
+    friend bool operator==(const node &l, const node &r) {
+        return l.lat == r.lat && l.lon == r.lon;
+    };
 
     /**
      * @brief Inequality operator to compare two nodes based on their IDs.
@@ -57,7 +62,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the IDs are not equal, false otherwise.
      */
-    friend bool operator!=(const node &l, const node &r);
+    friend bool operator!=(const node &l, const node &r) {
+        return !(l == r);
+    };
 
     /**
      * @brief Greater-than operator to compare nodes based on their f_cost.
@@ -66,7 +73,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the f_cost of l is greater than that of r.
      */
-    friend bool operator>(const node &l, const node &r);
+    friend bool operator>(const node &l, const node &r) {
+        return l.f_cost() > r.f_cost();
+    };
 
     /**
      * @brief Greater-than-or-equal-to operator to compare nodes based on their f_cost.
@@ -75,7 +84,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the f_cost of l is greater than or equal to that of r.
      */
-    friend bool operator>=(const node &l, const node &r);
+    friend bool operator>=(const node &l, const node &r) {
+        return l.f_cost() >= r.f_cost();
+    };
 
     /**
      * @brief Less-than operator to compare nodes based on their f_cost.
@@ -84,7 +95,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the f_cost of l is less than that of r.
      */
-    friend bool operator<(const node &l, const node &r);
+    friend bool operator<(const node &l, const node &r) {
+        return l.f_cost() < r.f_cost();
+    };
 
     /**
      * @brief Less-than-or-equal-to operator to compare nodes based on their f_cost.
@@ -93,7 +106,9 @@ public:
      * @param r The right-hand side node.
      * @return True if the f_cost of l is less than or equal to that of r.
      */
-    friend bool operator<=(const node &l, const node &r);
+    friend bool operator<=(const node &l, const node &r) {
+        return l.f_cost() <= r.f_cost();
+    };
 };
 
 /**

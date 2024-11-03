@@ -77,7 +77,8 @@ router.get("/path", async ctx => {
     console.log(from, to);
     const start = new node(from[0], from[1]);
     const end = new node(to[0], to[1]);
-    const _path = API.find_path(graph, start, end);
+    // const _path = API.find_path(graph, start, end);
+    // console.log(JSON.parse(_path));
     const out = td.decode(p.stdout).trim();
     const err = td.decode(p.stderr).trim();
     if (err) {
