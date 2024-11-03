@@ -28,19 +28,29 @@ The iOS app communicates with the API to get the shortest path between two locat
 
 ## Implementation
 
-Two shortest path algorithms have been implemented for this project. The first is Dijkstra's algorithm, which finds the
-shortest path between two nodes in a graph. The second is the A* algorithm, which is an extension of Dijkstra's
-algorithm that uses heuristics to improve performance.
+Two shortest path algorithms have been implemented for this project. The first is the A* algorithm, which is an
+algorithm that uses heuristics to improve performance. The second is Dijkstra's algorithm, which is a special case of A*
+with a heuristic of zero.
+
+* **Header
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/pathfinding.h)
+* **Implementation
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/pathfinding.tpp)
 
 Both the algorithms use a binary heap data structure to store the nodes and their distances from the source node. The
 binary heap implementation is based on the `heapq` module in Python.
 
 * **Header
-  File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/heap.h)
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/heap.h)
 * **Implementation
-  File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/heap.tpp)
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/heap.tpp)
 
 The graph is represented as an adjacency list, where each node has a list of its neighbors.
+
+* **Header
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/graph.h)
+* **Implementation
+  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/graph.tpp)
 
 ## Execution
 
