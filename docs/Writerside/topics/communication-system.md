@@ -1,6 +1,8 @@
 # Communication System
 
-Contributor: Jaicharan Yeluri
+Contributor: **Jaicharan Yeluri**
+
+## Introduction
 
 My work was to build an effective communication system for our college.
 However, Implementing the entire communication
@@ -35,11 +37,8 @@ This is crucial for our project, as we need to process messages quickly and effi
 
 ### Github links to the documented codes:
 
-- **Linked
-  lists
-  **: [](https://github.com/JCode16/avault/blob/ff7407cd5df86d551fe315a41cd330943d97bdd7/backend/app/api/core/linked_list.py)
-- **Queue
-  **: [](https://github.com/JCode16/avault/blob/092398f92ebcbae0a097a244a56606b39508bbf4/backend/app/api/core/queue.py)
+- **Linked lists**: [](https://github.com/JCode16/avault/blob/ff7407cd5df86d551fe315a41cd330943d97bdd7/backend/app/api/core/linked_list.py)
+- **Queue**: [](https://github.com/JCode16/avault/blob/092398f92ebcbae0a097a244a56606b39508bbf4/backend/app/api/core/queue.py)
 
 ## Execution
 

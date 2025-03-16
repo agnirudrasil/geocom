@@ -6,6 +6,7 @@
                  name="Instance Name"
                  start-page="Maps.md">
 
+    <toc-element topic="Overview.md"/>
     <toc-element topic="Maps.md"/>
     <toc-element topic="communication-system.md"/>
 </instance-profile>

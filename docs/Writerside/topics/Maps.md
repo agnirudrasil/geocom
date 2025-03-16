@@ -1,8 +1,8 @@
 # Maps
 
-## Introduction
+Contributor: **Agnirudra Sil** and **Yash Kumar Singh**
 
-Contributor: Agnirudra Sil and Yash Kumar Singh
+## Introduction
 
 This project focused on creating a local navigation system tailored specifically for our college campus. The goal of
 this system is to help students, staff, and visitors find the quickest path to any building or location within the
@@ -32,25 +32,22 @@ Two shortest path algorithms have been implemented for this project. The first i
 algorithm that uses heuristics to improve performance. The second is Dijkstra's algorithm, which is a special case of A*
 with a heuristic of zero.
 
+<br />
+
 * **Header
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/pathfinding.h)
-* **Implementation
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/pathfinding.tpp)
+  File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/pathfinding.h)
+* **Implementation File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/pathfinding.tpp)
 
 Both the algorithms use a binary heap data structure to store the nodes and their distances from the source node. The
 binary heap implementation is based on the `heapq` module in Python.
 
-* **Header
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/heap.h)
-* **Implementation
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/heap.tpp)
+* **Header File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/heap.h)
+* **Implementation File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/heap.tpp)
 
 The graph is represented as an adjacency list, where each node has a list of its neighbors.
 
-* **Header
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/graph.h)
-* **Implementation
-  File**: [](https://github.com/agnirudrasil/geocom/blob/7788000f346ff456ab1b2d96abcb94fbc270f8f0/pathfinding/graph.tpp)
+* **Header File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/graph.h)
+* **Implementation File**: [](https://github.com/agnirudrasil/geocom/blob/main/pathfinding/graph.tpp)
 
 ## Execution
 

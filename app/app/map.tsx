@@ -1,7 +1,7 @@
 import { Animated, StyleSheet, useAnimatedValue } from "react-native";
 
 import { View } from "@/components/Themed";
-import MapView from "react-native-maps";
+import MapView, { Geojson } from "react-native-maps";
 import { useEffect, useRef, useState } from "react";
 import {
     useTheme,
@@ -12,6 +12,7 @@ import {
     Separator,
     XStack,
     Label,
+    H4,
 } from "tamagui";
 import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
 import { MapPin, Navigation } from "@tamagui/lucide-icons";
@@ -21,6 +22,8 @@ import { SearchModal } from "@/components/search-modal";
 import { MapIndicators } from "@/components/MapIndicators";
 import { PathfindingAnimation } from "@/types/pathfinding-animation";
 import { Dropdown } from "@/components/select";
+import { getDistanceFromLatLon } from "@/utils/distance";
+import roads from "./nitk-roads.json";
 
 interface IdName {
     id: string;
@@ -105,6 +108,8 @@ export default function TabOneScreen() {
         }
     }, [data]);
 
+    const [showRoads, setShowRoads] = useState(false);
+
     return (
         <View>
             <SearchModal
@@ -119,11 +124,13 @@ export default function TabOneScreen() {
                 setOpen={() => setOpen(null)}
             />
             <MapView
+                onLongPress={() => {
+                    setShowRoads(showRoads => !showRoads);
+                }}
                 ref={mapRef}
                 style={styles.map}
                 onLayout={() => {
                     if (data) {
-                        console.log("Running");
                         mapRef.current?.fitToCoordinates(
                             data.path.map(([lat, lon]) => ({
                                 latitude: lat,
@@ -136,6 +143,13 @@ export default function TabOneScreen() {
                     }
                 }}
             >
+                {showRoads && (
+                    <Geojson
+                        geojson={roads}
+                        strokeColor="red"
+                        strokeWidth={2}
+                    />
+                )}
                 {data && (
                     <MapIndicators
                         map={mapRef.current!}
@@ -224,6 +238,24 @@ export default function TabOneScreen() {
                                         ]}
                                     />
                                 </XStack>
+                                <H4>
+                                    {data && "Shortest Distance:"}{" "}
+                                    {data?.path
+                                        .slice(1)
+                                        .reduce(
+                                            (a, b, index) =>
+                                                a +
+                                                getDistanceFromLatLon(
+                                                    b[0],
+                                                    b[1],
+                                                    data.path[index][0],
+                                                    data.path[index][1]
+                                                ),
+                                            0
+                                        )
+                                        .toFixed(2)}{" "}
+                                    km
+                                </H4>
                             </YStack>
                         )}
                     </YStack>

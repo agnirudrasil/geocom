@@ -72,7 +72,7 @@ router.get("/path", async ctx => {
     const end = new node(to[0], to[1]);
     let path;
     if (algo === "dijkstra") {
-        path = JSON.parse(API.djikstra_find_path(graph, start, end));
+        path = JSON.parse(API.dijkstra_find_path(graph, start, end));
     } else {
         path = JSON.parse(API.astar_find_path(graph, start, end));
     }
@@ -83,4 +83,4 @@ const app = new Application();
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen({ port: 8080 });
+app.listen({ port: 7200 });
